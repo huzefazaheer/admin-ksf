@@ -6,10 +6,6 @@ import {
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-const emailField = document.querySelector("#email");
-const passField = document.querySelector("#pass");
-const btnSubmit = document.querySelector("#submit");
-
 const firebaseConfig = {
   apiKey: "AIzaSyCJlMQv7Nz1jlPEPTA0Lv1-beekeJQVgXo",
   authDomain: "khariansportsfest-fde2f.firebaseapp.com",
@@ -29,21 +25,27 @@ const analytics = getAnalytics(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
+const emailField = document.querySelector("#email");
+const passField = document.querySelector("#pass");
+const btnSubmit = document.querySelector("#button");
+
 function signIn(email, pass) {
   return signInWithEmailAndPassword(auth, email, pass)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      // ...
+      console.log("successfully logged in");
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(errorMessage);
     });
 }
 
 btnSubmit.addEventListener("click", (e) => {
-  let email = emailField.innerText;
-  let pass = passField.innerText;
+  let email = emailField.value;
+  let pass = passField.value;
+  console.log(email);
   signIn(email, pass);
 });
